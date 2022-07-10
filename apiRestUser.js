@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require('cors')
 const errorHandling = require("./src/error/errorHandling")
 const userRouters = require("./src/routes/user.routers")
-const { app } = require("express");
+const app = require("./app")
 const mysql = require("mysql2");
 
 let port = process.env.PORT || 3000;
