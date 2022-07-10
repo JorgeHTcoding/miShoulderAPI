@@ -1,4 +1,6 @@
 const { application } = require("express");
+const mysql = require("mysql2");
+
 
 let port = process.env.PORT || 3000;
 
@@ -17,5 +19,5 @@ const connection = mysql.createConnection(
             console.log("Conexión establecida")
         }
     });
-    
+
     app.listen(port);
