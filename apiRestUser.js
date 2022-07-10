@@ -5,7 +5,7 @@ const userRouters = require("./src/routes/user.routers")
 const { app } = require("express");
 const mysql = require("mysql2");
 
-const app = express();
+
 app.set("port", process.env.PORT || 3000)
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
