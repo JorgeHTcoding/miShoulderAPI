@@ -2,9 +2,9 @@
   "name": "apimyshoulder",
   "version": "1.0.0",
   "description": "",
-  "main": "apiRestUser.js",
+  "main": "apiRest.js",
   "scripts": {
-    "start": "node apiRestUser.js"
+    "start": "node apiRest.js"
   },
   "repository": {
     "type": "git",
