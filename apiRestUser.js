@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require('cors')
 const errorHandling = require("./src/error/errorHandling")
-const userRouters = require("./routes/user.routers")
+const userRouters = require("./src/routes/user.routers")
 const { app } = require("express");
 const mysql = require("mysql2");
 
@@ -24,8 +24,6 @@ app.use(function (req, res, next)
 
 app.use(errorHandling)
 
-let port = process.env.PORT || 3000;
-
 const connection = mysql.createConnection(
 {
     host        :"myshoulder.cdvg9i8dvcl6.eu-west-3.rds.amazonaws.com",
@@ -41,5 +39,4 @@ connection.connect(function(error){
         console.log("Conexión establecida")
     }
 });
-app.listen(port);
-module.exports = connection;
+// app.listen(port);
