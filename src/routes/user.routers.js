@@ -4,7 +4,7 @@ const userCtrl = require("../controller/user.controller")
 
 
 
-router.get("/user",userCtrl.getUser)
+router.get("https://myshoulder.herokuapp.com/user",userCtrl.getUser)
 
 router.post("/user",userCtrl.postUser)
 
