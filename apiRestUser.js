@@ -1,5 +1,6 @@
 const { application } = require("express");
 const mysql = require("mysql2");
+const app = require("../APImyShoulder/src/app")
 
 
 let port = process.env.PORT || 3000;
