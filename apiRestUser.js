@@ -5,12 +5,14 @@ const userRouters = require("./src/routes/user.routers")
 const { app } = require("express");
 const mysql = require("mysql2");
 
+let port = process.env.PORT || 3000;
 
-app.set("port", process.env.PORT || 3000)
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(userRouters);
+app.listen(port);
+
 ;
 
 app.use(function (req, res, next) 
@@ -39,4 +41,3 @@ connection.connect(function(error){
         console.log("Conexión establecida")
     }
 });
-// app.listen(port);
