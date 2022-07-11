@@ -1,23 +1,13 @@
 const { response } = require("express");
 const connection = require("../database");
 
-// USER
+// GET USUARIO
 
 function getUser(request, response) {
 
-let sql;
-if(request.query.id){
-sql = "SELECT * FROM user WHERE id_user=" + request.query.id
-connection.query(sql, function (err, result) {
-    if (err) {
-        console.log(err);
-    }
-    else {
-        response.send(result);
-    }
-})
-}else{
-   sql = "SELECT * FROM user"
+    let sql;
+    if(request.query.id){
+    sql = "SELECT * FROM user WHERE id_user=" + request.query.id
     connection.query(sql, function (err, result) {
         if (err) {
             console.log(err);
@@ -26,27 +16,41 @@ connection.query(sql, function (err, result) {
             response.send(result);
         }
     })
-}
-}
+    }else{
+       sql = "SELECT * FROM user"
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                response.send(result);
+            }
+        })
+    }
+    }
+    
+    // POST USER
+    
+    function postUser(request, response) {
+        console.log("Entramos a la funcion postUsuario")
+        let sql = "INSERT INTO user(tipo,nick, name, sname, email, telefono, descripcion, img, direccion, password)" + "VALUES ('" + request.body.tipo + "','" + request.body.nick + "','" + request.body.name + "', '" + request.body.sname + "', '" + request.body.email + "', '" + request.body.telefono + "', '" + request.body.descripcion + "', '" + request.body.img + "','" + request.body.direccion + "','" + request.body.password + "')";
+        console.log(sql)
+        console.log("entramos al back")
+        connection.query(sql, function (err, result) {
+    
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(result);
+                if (result.insertId)
+                    response.send(String(result.insertId))
+                else
+                    response.send(respuesta)
+            }
+        })
+    }
 
-function postUser(request, response) {
-    console.log("Entramos a la funcion postUsuario")
-    let sql = "INSERT INTO user(tipo,nick, name, sname, email, telefono, descripcion, img, direccion)" + "VALUES ('" + request.body.tipo + "','" + request.body.nick + "','" + request.body.name + "', '" + request.body.sname + "', '" + request.body.email + "', '" + request.body.telefono + "', '" + request.body.descripcion + "', '" + request.body.img + "','" + request.body.direccion + "')";
-    console.log(sql)
-    console.log("entramos al back")
-    connection.query(sql, function (err, result) {
-
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(result);
-            if (result.insertId)
-                response.send(String(result.insertId))
-            else
-                response.send(respuesta)
-        }
-    })
-}
+// EDITAR PERFIL
 
 function putUser(request, response) {
     {
@@ -95,6 +99,8 @@ function putUser(request, response) {
     }
 }
 
+// ELIMINAR USUARIO
+
 function deleteUser(request, response) {
    
     let sql;
@@ -113,5 +119,6 @@ function deleteUser(request, response) {
 
     })
 }
+
 
 module.exports = { postUser, getUser, putUser, deleteUser }

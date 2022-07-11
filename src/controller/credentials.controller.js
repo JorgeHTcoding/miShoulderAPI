@@ -21,7 +21,6 @@ function getLogin(request, response) {
 
     }
 
-
 // REGISTRO 
 
 function postUser(request, response) {
@@ -42,3 +41,5 @@ function postUser(request, response) {
         }
     })
 }
+
+module.exports = { postUser, getLogin }
