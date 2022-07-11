@@ -5,7 +5,19 @@ const connection = require("../database");
 
 function getUser(request, response) {
 
-    let sql = "SELECT * FROM user"
+let sql;
+if(request.query.id){
+sql = "SELECT * FROM user WHERE id_user=" + request.query.id
+connection.query(sql, function (err, result) {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        response.send(result);
+    }
+})
+}else{
+   sql = "SELECT * FROM user"
     connection.query(sql, function (err, result) {
         if (err) {
             console.log(err);
@@ -14,6 +26,7 @@ function getUser(request, response) {
             response.send(result);
         }
     })
+}
 }
 
 function postUser(request, response) {
