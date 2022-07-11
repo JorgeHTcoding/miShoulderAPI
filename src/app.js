@@ -2,6 +2,7 @@ const express = require("express")
 const cors = require('cors')
 const errorHandling = require("./error/errorHandling")
 const userRouters = require("./routes/user.routers")
+const eventosRouters = require("./routes/eventos.routers")
 
 const app = express();
 app.set("port", process.env.PORT || 3000)
@@ -9,6 +10,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(userRouters);
+app.use(eventosRouters);
 ;
 
 app.use(function (req, res, next) 
