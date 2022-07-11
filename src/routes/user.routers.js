@@ -12,4 +12,8 @@ router.put("/user",userCtrl.putUser)
 
 router.delete("/user",userCtrl.deleteUser)
 
+router.post("/registro",userCtrl.postUser)
+
+router.post("/login",userCtrl.getUser)
+
 module.exports = router;

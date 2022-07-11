@@ -1,7 +1,7 @@
 const { response } = require("express");
 const connection = require("../database");
 
-// RELACIONADO CON TABLA USER
+// USER
 
 function getUser(request, response) {
 
@@ -113,4 +113,5 @@ function deleteUser(request, response) {
 
     })
 }
+
 module.exports = { postUser, getUser, putUser, deleteUser }
