@@ -5,7 +5,7 @@ const connection = mysql.createConnection(
     host        :"myshoulder.cdvg9i8dvcl6.eu-west-3.rds.amazonaws.com",
     user        :"ComboWombo",
     password    :"ComboWombo123!",
-    database    :"myshoulder"
+    database    :"myshoulder2"
 });
 
 connection.connect(function(error){

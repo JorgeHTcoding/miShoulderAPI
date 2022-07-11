@@ -8,8 +8,8 @@ router.get("/user",userCtrl.getUser)
 
 router.post("/user",userCtrl.postUser)
 
-// router.put("/user",userCtrl.putUser)
+router.put("/user",userCtrl.putUser)
 
-// router.delete("/user",userCtrl.deleteUser)
+router.delete("/user",userCtrl.deleteUser)
 
 module.exports = router;
