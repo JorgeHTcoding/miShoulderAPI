@@ -176,5 +176,5 @@ function getPresentacion(request,response){
 
 
 
-module.exports = {postMensaje , getMensaje, postPresentacion, getPresentacion, getConversacion, getEventos}
+module.exports = {postMensaje , getMensaje, postPresentacion, getPresentacion, getConversacion}
 
