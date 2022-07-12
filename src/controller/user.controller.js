@@ -100,4 +100,8 @@ function deleteUser(request, response) {
 
     })
 }
-module.exports = { postUser, getUser, putUser, deleteUser }
+
+
+
+
+module.exports = { postUser, getUser, putUser, deleteUser}
