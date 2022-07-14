@@ -10,9 +10,40 @@ function getStart(request, response) {
     response.send(respuesta);
     next();
 }
+//Get Info Eventos con id user
+// url  /eventos?id= 
 
-
-// function getEventos(request, response) {
+function getEvento(request, response){
+    
+   
+    let sql = "SELECT * FROM eventos WHERE id_eventos=" + request.query.id
+    connection.query(sql, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        response.send(result);
+                        console.log(result)
+                    }
+    })
+    
+}
+function getEventosUser(request, response){
+    
+   
+    let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
+    connection.query(sql, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        response.send(result);
+                        console.log(result)
+                    }
+    })
+    
+}
+// function getEventosFiltro(request, response) {
     
 //         if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
 
@@ -250,4 +281,4 @@ function postEventos(request, response) {
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos}
+    module.exports = { getStart, postEventos, getEventosUser,getEvento}
