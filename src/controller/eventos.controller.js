@@ -16,7 +16,7 @@ function getStart(request, response) {
 function getEvento(request, response){
     
    
-    let sql = "SELECT * FROM eventos WHERE id_eventos=" + request.query.id
+    let sql = "SELECT * FROM eventos " 
     connection.query(sql, function (err, result) {
                     if (err) {
                         console.log(err);
