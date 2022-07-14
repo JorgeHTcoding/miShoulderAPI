@@ -2,8 +2,7 @@ const express = require("express")
 const cors = require('cors')
 const errorHandling = require("./error/errorHandling")
 const userRouters = require("./routes/user.routers")
-const credentialsRouters = require("./routes/credentials.routers")
-const chatRouters = require("./routes/chat.routers")
+const eventosRouters = require("./routes/eventos.routers")
 
 const app = express();
 app.set("port", process.env.PORT || 3000)
@@ -13,6 +12,8 @@ app.use(express.json());
 app.use(userRouters);
 app.use(credentialsRouters);
 app.use(chatRouters);
+app.use(eventosRouters);
+;
 
 app.use(function (req, res, next) 
     {
