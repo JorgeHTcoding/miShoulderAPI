@@ -5,6 +5,7 @@ const userRouters = require("./routes/user.routers")
 const eventosRouters = require("./routes/eventos.routers")
 const credentialsRouters = require("./routes/credentials.routers")
 const chatRouters = require("./routes/chat.routers")
+
 const app = express();
 app.set("port", process.env.PORT || 3000)
 app.use(cors());
