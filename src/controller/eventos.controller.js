@@ -281,4 +281,4 @@ function postEventos(request, response) {
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos, getEventosUser,getEvento}
+    module.exports = { getStart, postEventos, getEventosUser, getEvento}
