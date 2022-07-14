@@ -155,6 +155,8 @@ function postEventos(request, response) {
 
     let anfitrion = request.query.id
 
+    console.log(anfitrion);
+
     let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha, img)" + "VALUES ('" + anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion + "','" + request.body.descripcion + "', '" + request.body.modalidad + "', '" + request.body.terapia + "', '" + request.body.fecha + "', '" + request.body.img + "')";
 
     console.log(sql)
