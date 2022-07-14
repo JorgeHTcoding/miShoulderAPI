@@ -79,87 +79,87 @@ function getPresentacion(request,response){
 }
 
 
-// function getEventos(request, response) {
+function getEventos(request, response) {
     
-//     if(!request.query.id){
+    if(!request.query.id){
         
-//         let loc = request.body.loc
-//         let locf = "localidad = "+"'" +request.body.loc+"'"
-//         let mod = request.body.mod
-//         let modf = "modalidad = "+"'" +request.body.mod+"'"
-//         let ter = request.body.ter
-//         let terf = "terapia = " +"'"+request.body.ter+"'"
-//         let date = request.body.date
-//         let datef = "date = "+"'" +request.body.date+"'"
-//         let filter=[loc,locf,mod,modf,ter,terf,date,datef]
-//         let sql = "SELECT * FROM user_eventos " 
-//         console.log(filter)
+        let loc = request.body.loc
+        let locf = "localidad = "+"'" +request.body.loc+"'"
+        let mod = request.body.mod
+        let modf = "modalidad = "+"'" +request.body.mod+"'"
+        let ter = request.body.ter
+        let terf = "terapia = " +"'"+request.body.ter+"'"
+        let date = request.body.date
+        let datef = "date = "+"'" +request.body.date+"'"
+        let filter=[loc,locf,mod,modf,ter,terf,date,datef]
+        let sql = "SELECT * FROM user_eventos " 
+        console.log(filter)
         
-//         let control =1;
-//         for(let i=0; i<filter.length;i+=2){
-//             if(filter[i]!=undefined && control>1){
-//                 sql+=" AND "+filter[i+1]
+        let control =1;
+        for(let i=0; i<filter.length;i+=2){
+            if(filter[i]!=undefined && control>1){
+                sql+=" AND "+filter[i+1]
                
-//             }else if(filter[i]!=undefined){
-//                 sql+="WHERE "+ filter[i+1];
-//                 control++;
-//             }
-//         }
-//         console.log("La query dinamica es: ")
-//         console.log(sql);
-//         // sql.splice(sql.length-3,1);
-//         // console.log(sql)
+            }else if(filter[i]!=undefined){
+                sql+="WHERE "+ filter[i+1];
+                control++;
+            }
+        }
+        console.log("La query dinamica es: ")
+        console.log(sql);
+        // sql.splice(sql.length-3,1);
+        // console.log(sql)
 
         
 
 
-//         connection.query(sql, function (err, result) {
-//             if (err) {
-//                 console.log(err);
-//             }
-//             else {
-//                 response.send(result);
-//             }
-//         })
-//     }else{
-//         let id = request.query.id
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                response.send(result);
+            }
+        })
+    }else{
+        let id = request.query.id
         
-//         let loc = request.body.loc
-//         let locf = "localidad = "+"'" +request.body.loc+"'"
-//         let mod = request.body.mod
-//         let modf = "modalidad = "+"'" +request.body.mod+"'"
-//         let ter = request.body.ter
-//         let terf = "terapia = " +"'"+request.body.ter+"'"
-//         let date = request.body.date
-//         let datef = "date = "+"'" +request.body.date+"'"
-//         let filter=[loc,locf,mod,modf,ter,terf,date,datef]
-//         let sql = "SELECT * FROM user_eventos WHERE id_user="+id 
-//         console.log(filter)
+        let loc = request.body.loc
+        let locf = "localidad = "+"'" +request.body.loc+"'"
+        let mod = request.body.mod
+        let modf = "modalidad = "+"'" +request.body.mod+"'"
+        let ter = request.body.ter
+        let terf = "terapia = " +"'"+request.body.ter+"'"
+        let date = request.body.date
+        let datef = "date = "+"'" +request.body.date+"'"
+        let filter=[loc,locf,mod,modf,ter,terf,date,datef]
+        let sql = "SELECT * FROM user_eventos WHERE id_user="+id 
+        console.log(filter)
         
-//         for(let i=0; i<filter.length;i+=2){
-//             if(filter[i]!=undefined){
-//                 sql+=" AND "+filter[i+1]
+        for(let i=0; i<filter.length;i+=2){
+            if(filter[i]!=undefined){
+                sql+=" AND "+filter[i+1]
      
-//         }
-//         console.log("La query dinamica es: ")
-//         console.log(sql);
-//         // sql.splice(sql.length-3,1);
-//         // console.log(sql)
+        }
+        console.log("La query dinamica es: ")
+        console.log(sql);
+        // sql.splice(sql.length-3,1);
+        // console.log(sql)
 
         
 
 
-//         connection.query(sql, function (err, result) {
-//             if (err) {
-//                 console.log(err);
-//             }
-//             else {
-//                 response.send(result);
-//             }
-//         })
-//     }
-//     }
-// }
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                response.send(result);
+            }
+        })
+    }
+    }
+}
 // function postPac(request, response) {
 //     {
 
