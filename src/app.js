@@ -13,11 +13,6 @@ app.use(express.json());
 app.use(userRouters);
 app.use(credentialsRouters);
 app.use(chatRouters);
-<<<<<<< HEAD
-;
-=======
-
->>>>>>> b9f7d971bbf5066b01968feade68d5a2e08a6e8a
 
 app.use(function (req, res, next) 
     {
