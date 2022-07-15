@@ -5,6 +5,10 @@ const userRouters = require("./routes/user.routers")
 const eventosRouters = require("./routes/eventos.routers")
 const credentialsRouters = require("./routes/credentials.routers")
 const chatRouters = require("./routes/chat.routers")
+const adminPac = require("../src/routes/adminPac.routers")
+const busProfRouters = require("./routes/busProf.routers")
+const verPacientes = require("./routes/verPaciente.routers")
+
 
 const app = express();
 app.set("port", process.env.PORT || 3000)
@@ -16,6 +20,10 @@ app.use(credentialsRouters);
 app.use(chatRouters);
 app.use(eventosRouters);
 
+app.use(adminPac);
+app.use(busProfRouters);
+app.use(verPacientes);
+;
 
 app.use(function (req, res, next) 
     {
