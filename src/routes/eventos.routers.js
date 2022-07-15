@@ -4,8 +4,8 @@ const eventosCtrl = require("../controller/eventos.controller")
 
 
 router.get("/", eventosCtrl.getStart);
-
-router.get("/eventos",eventosCtrl.getEvento)
+//notocar abajo, es de alvaro
+router.get("/eventos",eventosCtrl.getEventoProf)
 
 router.get("/eventosUser",eventosCtrl.getEventosUser)
 

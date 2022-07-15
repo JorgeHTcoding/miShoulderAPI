@@ -13,9 +13,10 @@ function getStart(request, response) {
 //Get Info Eventos con id user
 // url  /eventos?id= 
 
-function getEvento(request, response){
-    
-   
+function getEventoProf(request, response){
+    console.log("eventos prof")
+    if(request.query.id==null){
+       console.log("eventos prof if")
     let sql = "SELECT * FROM eventos " 
     connection.query(sql, function (err, result) {
                     if (err) {
@@ -27,11 +28,8 @@ function getEvento(request, response){
                     }
     })
     
-}
-function getEventosUser(request, response){
-    
-   
-    let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
+}else{
+      let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
     connection.query(sql, function (err, result) {
                     if (err) {
                         console.log(err);
@@ -41,7 +39,22 @@ function getEventosUser(request, response){
                         console.log(result)
                     }
     })
+}}
+function getEventosUser(request, response){
     
+   console.log("Entramos por eventos y users")
+   let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
+   connection.query(sql, function (err, result) {
+       if (err) {
+           console.log(err);
+        }
+        else {
+            response.send(result);
+            console.log(result)
+        }
+    })
+    
+    console.log(result)
 }
 // function getEventosFiltro(request, response) {
     
@@ -281,4 +294,4 @@ function postEventos(request, response) {
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos, getEventosUser, getEvento}
+    module.exports = { getStart, postEventos, getEventosUser, getEventoProf}
