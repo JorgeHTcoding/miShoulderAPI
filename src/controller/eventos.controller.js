@@ -153,11 +153,9 @@ function getStart(request, response) {
 function postEventos(request, response) {
     console.log("Entramos a la funcion posEventos")
 
-    let anfitrion = request.query.id
+    console.log(request.body.anfitrion);
 
-    console.log(anfitrion);
-
-    let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha, img)" + "VALUES ('" + anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion + "','" + request.body.descripcion + "', '" + request.body.modalidad + "', '" + request.body.terapia + "', '" + request.body.fecha + "', '" + request.body.img + "')";
+    let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha, img)" + "VALUES ('" + request.body.anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion + "','" + request.body.descripcion + "', '" + request.body.modalidad + "', '" + request.body.terapia + "', '" + request.body.fecha + "', '" + request.body.img + "')";
 
     console.log(sql)
     console.log("entramos al back")
