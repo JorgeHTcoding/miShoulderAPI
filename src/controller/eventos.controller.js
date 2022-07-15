@@ -13,7 +13,7 @@ function getStart(request, response) {
 //Get Info Eventos con id user
 // url  /eventos?id= 
 
-function getEvento(request, response){
+function getEventos(request, response){
     
    
     let sql = "SELECT * FROM eventos WHERE id_eventos=" + request.query.id
@@ -281,4 +281,4 @@ function postEventos(request, response) {
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos, getEventosUser,getEvento}
+    module.exports = { getStart, postEventos, getEventosUser,getEventos}
