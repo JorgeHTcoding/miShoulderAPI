@@ -56,9 +56,9 @@ function putUser(request, response) {
     {
 
         
-        if (request.query.id != "null") {
-            console.log(request.query.id + " el id de usuario en el back")
-           
+        if (request.body.id_user != "null") {
+            console.log(request.body.id_user+ " el id de usuario en el back")
+            
             let tipo = request.body.tipo;
             let nick = request.body.nick;
             let name = request.body.name;
@@ -79,7 +79,7 @@ function putUser(request, response) {
                 "nick = COALESCE(?, nick), " + "name = COALESCE(?,name), " + "sname = COALESCE(?, sname), " +
                 "email = COALESCE(?, email), " + "telefono = COALESCE(?, telefono), " + "descripcion = COALESCE(?, descripcion), " + "img = COALESCE(?, img), " +
                 "direccion = COALESCE(?, direccion), " + "acreditacion = COALESCE(?, acreditacion), " + "horario = COALESCE(?, horario), " +"modalidad = COALESCE(?, modalidad), "
-                 +"password = COALESCE(?, password) WHERE id_user=" + request.query.id;
+                 +"password = COALESCE(?, password) WHERE id_user=" + request.body.id_user;
 
             console.log(sql);
             connection.query(sql, params, function (err, result) {
