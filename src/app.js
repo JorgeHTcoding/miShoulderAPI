@@ -8,6 +8,7 @@ const chatRouters = require("./routes/chat.routers")
 const adminPac = require("../src/routes/adminPac.routers")
 const busProfRouters = require("./routes/busProf.routers")
 const verPacientes = require("./routes/verPaciente.routers")
+const adminEventos = require("./routes/adminEventos.routers")
 
 
 const app = express();
@@ -19,7 +20,7 @@ app.use(userRouters);
 app.use(credentialsRouters);
 app.use(chatRouters);
 app.use(eventosRouters);
-
+app.use(adminEventos)
 app.use(adminPac);
 app.use(busProfRouters);
 app.use(verPacientes);
