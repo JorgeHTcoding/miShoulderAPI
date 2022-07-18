@@ -4,7 +4,7 @@ const connection = require("../database");
 
 
 function getPac(request, response) {
-
+    console.log("Get pacientes")
     let sql;
     if(request.query.id){
     sql = "SELECT * FROM user JOIN profesional_pacientes ON (user.id_user = profesional_pacientes.id_user)WHERE id_profesional = " + request.query.id 
@@ -16,6 +16,22 @@ function getPac(request, response) {
             response.send(result);
         }
     })
+    
+}}
+function getPro(request, response) {
+    console.log("Get profesional")
+    let sql;
+    if(request.query.id){
+    sql = "SELECT * FROM profesional_pacientes JOIN user ON (profesional_pacientes.id_profesional = user.id_user)WHERE profesional_pacientes.id_user = " + request.query.id 
+    connection.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            response.send(result);
+        }
+    })
+    
 }}
 
 
@@ -70,5 +86,8 @@ function postPac(request, response) {
             })
     }
 }
+//Parte de Alvaro
 
-module.exports = {getPac,deletePac,postPac}
+
+
+module.exports = {getPac,deletePac,postPac,getPro}

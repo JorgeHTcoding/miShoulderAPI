@@ -5,7 +5,7 @@ const userRouters = require("./routes/user.routers")
 const eventosRouters = require("./routes/eventos.routers")
 const credentialsRouters = require("./routes/credentials.routers")
 const chatRouters = require("./routes/chat.routers")
-
+const adminPac = require("./routes/adminPac.routers")
 const app = express();
 app.set("port", process.env.PORT || 3000)
 app.use(cors());
@@ -15,7 +15,7 @@ app.use(userRouters);
 app.use(credentialsRouters);
 app.use(chatRouters);
 app.use(eventosRouters);
-
+app.use(adminPac);
 
 app.use(function (req, res, next) 
     {
