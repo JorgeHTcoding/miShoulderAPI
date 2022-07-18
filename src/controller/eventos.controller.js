@@ -53,8 +53,66 @@ function getEventosUser(request, response){
             console.log(result)
         }
     })
+  
+
+
+}
+function getEventosAnfitrion(request, response){
     
-    console.log(result)
+   console.log("Entramos por eventos y anf")
+   let sql = "SELECT * FROM eventos WHERE anfitrion=" + request.query.id
+   connection.query(sql, function (err, result) {
+       if (err) {
+           console.log(err);
+        }
+        else {
+            response.send(result);
+            console.log(result)
+        }
+    })
+}
+function postApuntar(request, response){
+    
+  console.log("Entramos a la funcion posEventos")
+    
+    console.log(request.body)
+    let sql = "INSERT INTO user_evento(id_usuario,id_eventos)" + "VALUES ('" + request.body.id_user + "','" + request.body.id_eventos +"')";
+    console.log(sql)
+    console.log(sql)
+    console.log("entramos al back")
+    connection.query(sql, function (err, result) {
+
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+            if (result.insertId)
+                response.send(String(result.insertId))
+            else
+                response.send(result)
+        }
+    })
+}
+function deleteApuntar(request, response){
+    
+  console.log("Entramos a la funcion deleteApuntar")
+    
+    console.log(request.body)
+    let sql = "DELETE FROM user_evento WHERE id_usuario=" + request.query.id + " AND id_eventos=" + request.query.id_eventos;
+    console.log(sql)
+    console.log("entramos al back")
+    connection.query(sql, function (err, result) {
+
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+            if (result.insertId)
+                response.send(String(result.insertId))
+            else
+                response.send(result)
+        }
+    })
 }
 // function getEventosFiltro(request, response) {
     
@@ -238,10 +296,10 @@ function putEventos(request, response) {
             let terapia           = request.body.terapia;
             let fecha             = request.body.fecha;
             let img               = request.body.img; 
-         
-            
-            let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha];
 
+         
+            let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha];
+            
             let sql = "UPDATE user_eventos SET anfitrion = COALESCE(?,anfitrion) , " + "titulo = COALESCE(?, titulo), " +
                                       "localidad = COALESCE(?,localidad), "  + "direccion = COALESCE(?,direccion), " +
                                       "descripcion = COALESCE(?, descripcion), " + "modalidad = COALESCE(?, modalidad), " + 
@@ -290,8 +348,10 @@ function deleteEventos(request, response) {
     })
 }
 
-
+function postEventos(request, response) {
+    
+}
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos, getEventosUser, getEventoProf,deleteEventos,putEventos}
+    module.exports = { getStart, postEventos, getEventosUser, getEventoProf,postApuntar, deleteApuntar, getEventosAnfitrion,deleteEventos,putEventos}
