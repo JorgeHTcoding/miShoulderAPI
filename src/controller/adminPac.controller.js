@@ -70,7 +70,34 @@ function postPac(request, response) {
             
          
             let sql = "UPDATE profesional_pacientes SET diagnostico =" + "'" + request.body.diagnostico + "'" +
-            " WHERE id_user=" + request.query.id
+            " WHERE id_profesional=" + request.body.id_profesional + " AND id_user=" + request.body.id_user ;
+
+            console.log(sql);
+            connection.query(sql, function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(result);
+                    if (result.insertId)
+                        response.send(String(result.insertId))
+                    else
+                        response.send(result)
+                }
+            })
+    }
+}
+
+function putPaciente(request, response) {
+    {
+
+    
+            console.log(request.query.id_profesional + " el id de usuario profesional en el back")
+            console.log(request.body.diagnostico)
+ 
+;
+        
+            let sql = "UPDATE profesional_pacientes SET diagnostico =" + "'" + request.body.diagnostico + "'" +
+            " WHERE id_profesional=" + request.body.id_profesional + " AND id_user=" + request.body.id_user ;
 
             console.log(sql);
             connection.query(sql, function (err, result) {
@@ -90,4 +117,4 @@ function postPac(request, response) {
 
 
 
-module.exports = {getPac,deletePac,postPac,getPro}
+module.exports = {getPac,deletePac,postPac,getPro,putPaciente}
