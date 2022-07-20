@@ -118,7 +118,7 @@ function deleteApuntar(request, response){
     
 //         if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
 
-//             sql = "SELECT * FROM user_eventos"
+//             sql = "SELECT * FROM user_evento"
 
 //                 connection.query(sql, function (err, result) {
 //                     if (err) {
@@ -144,7 +144,7 @@ function deleteApuntar(request, response){
     
 //                 let filter = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
     
-//                 let sql = "SELECT * FROM user_eventos " 
+//                 let sql = "SELECT * FROM user_evento " 
 //                 console.log(filter)
                 
 //                 let control = 1;
@@ -191,7 +191,7 @@ function deleteApuntar(request, response){
                     
 //                     let filter  = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
 
-//                     let sql     = "SELECT * FROM user_eventos WHERE id_user=" + id 
+//                     let sql     = "SELECT * FROM user_evento WHERE id_user=" + id 
         
 //                     console.log(filter)
                     
@@ -227,7 +227,7 @@ function deleteApuntar(request, response){
     // let sql;
     // if(request.query.id){
 
-    // sql = "SELECT * FROM user_eventos WHERE id_user=" + request.query.id
+    // sql = "SELECT * FROM user_evento WHERE id_user=" + request.query.id
 
     // connection.query(sql, function (err, result) {
     //     if (err) {
@@ -238,7 +238,7 @@ function deleteApuntar(request, response){
     //     }
     // })
     // }else{
-    //    sql = "SELECT * FROM user_eventos"
+    //    sql = "SELECT * FROM user_evento"
     //     connection.query(sql, function (err, result) {
     //         if (err) {
     //             console.log(err);
@@ -300,7 +300,7 @@ function putEventos(request, response) {
          
             let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha];
             
-            let sql = "UPDATE user_eventos SET anfitrion = COALESCE(?,anfitrion) , " + "titulo = COALESCE(?, titulo), " +
+            let sql = "UPDATE user_evento SET anfitrion = COALESCE(?,anfitrion) , " + "titulo = COALESCE(?, titulo), " +
                                       "localidad = COALESCE(?,localidad), "  + "direccion = COALESCE(?,direccion), " +
                                       "descripcion = COALESCE(?, descripcion), " + "modalidad = COALESCE(?, modalidad), " + 
                                       "terapia = COALESCE(?, terapia), " + "fecha = COALESCE(?, fecha)" + "img = COALESCE(?, img),  WHERE id_eventos=" + request.query.id_eventos;

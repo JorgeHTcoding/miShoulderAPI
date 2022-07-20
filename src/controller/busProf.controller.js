@@ -18,7 +18,7 @@ function getProf(request, response) {
 
             let filter  = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
 
-            let sql     = "SELECT * FROM user_eventos WHERE id_user=" + id 
+            let sql     = "SELECT * FROM user_evento WHERE id_user=" + id 
 
             console.log(filter)
 

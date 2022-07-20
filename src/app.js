@@ -9,6 +9,8 @@ const adminPac = require("../src/routes/adminPac.routers")
 const busProfRouters = require("./routes/busProf.routers")
 const verPacientes = require("./routes/verPaciente.routers")
 const adminEventos = require("./routes/adminEventos.routers")
+const psico = require("./routes/psico.routers")
+const carta = require("./routes/presentacion.routers")
 
 
 const app = express();
@@ -24,6 +26,8 @@ app.use(adminEventos)
 app.use(adminPac);
 app.use(busProfRouters);
 app.use(verPacientes);
+app.use(psico);
+app.use(carta)
 ;
 
 app.use(function (req, res, next) 

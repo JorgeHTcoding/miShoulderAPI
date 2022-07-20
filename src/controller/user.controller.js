@@ -28,6 +28,8 @@ function getUser(request, response) {
         })
     }
     }
+
+  
     
     // POST USER
     

@@ -92,7 +92,7 @@ function getEventos(request, response) {
         let date = request.body.date
         let datef = "date = "+"'" +request.body.date+"'"
         let filter=[loc,locf,mod,modf,ter,terf,date,datef]
-        let sql = "SELECT * FROM user_eventos " 
+        let sql = "SELECT * FROM user_evento " 
         console.log(filter)
         
         let control =1;
@@ -133,7 +133,7 @@ function getEventos(request, response) {
         let date = request.body.date
         let datef = "date = "+"'" +request.body.date+"'"
         let filter=[loc,locf,mod,modf,ter,terf,date,datef]
-        let sql = "SELECT * FROM user_eventos WHERE id_user="+id 
+        let sql = "SELECT * FROM user_evento WHERE id_user="+id 
         console.log(filter)
         
         for(let i=0; i<filter.length;i+=2){
