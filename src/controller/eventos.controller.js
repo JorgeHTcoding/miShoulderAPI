@@ -116,20 +116,20 @@ function deleteApuntar(request, response){
 }
 // function getEventosFiltro(request, response) {
     
-//         if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
+//         // if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
 
-//             sql = "SELECT * FROM user_evento"
+//         //     sql = "SELECT * FROM user_eventos"
 
-//                 connection.query(sql, function (err, result) {
-//                     if (err) {
-//                         console.log(err);
-//                     }
-//                     else {
-//                         response.send(result);
-//                     }
-//                 })
+//         //         connection.query(sql, function (err, result) {
+//         //             if (err) {
+//         //                 console.log(err);
+//         //             }
+//         //             else {
+//         //                 response.send(result);
+//         //             }
+//         //         })
         
-//         }else {
+//         // }else {
 
 //             if(!request.query.id) {
             
@@ -144,7 +144,7 @@ function deleteApuntar(request, response){
     
 //                 let filter = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
     
-//                 let sql = "SELECT * FROM user_evento " 
+//                 let sql = "SELECT * FROM user_eventos " 
 //                 console.log(filter)
                 
 //                 let control = 1;
@@ -191,7 +191,7 @@ function deleteApuntar(request, response){
                     
 //                     let filter  = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
 
-//                     let sql     = "SELECT * FROM user_evento WHERE id_user=" + id 
+//                     let sql     = "SELECT * FROM user_eventos WHERE id_user=" + id 
         
 //                     console.log(filter)
                     
@@ -218,37 +218,37 @@ function deleteApuntar(request, response){
 
 //         }
 
+    
+
+
+        
+
+
+//     let sql;
+//     if(request.query.id){
+
+//     sql = "SELECT * FROM user_eventos WHERE id_user=" + request.query.id
+
+//     connection.query(sql, function (err, result) {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             response.send(result);
+//         }
+//     })
+//     }else{
+//        sql = "SELECT * FROM user_eventos"
+//         connection.query(sql, function (err, result) {
+//             if (err) {
+//                 console.log(err);
+//             }
+//             else {
+//                 response.send(result);
+//             }
+//         })
 //     }
-
-
-        // }
-
-
-    // let sql;
-    // if(request.query.id){
-
-    // sql = "SELECT * FROM user_evento WHERE id_user=" + request.query.id
-
-    // connection.query(sql, function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     else {
-    //         response.send(result);
-    //     }
-    // })
-    // }else{
-    //    sql = "SELECT * FROM user_evento"
-    //     connection.query(sql, function (err, result) {
-    //         if (err) {
-    //             console.log(err);
-    //         }
-    //         else {
-    //             response.send(result);
-    //         }
-    //     })
-    // }
-    // }
+    
 
 
 
