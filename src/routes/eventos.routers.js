@@ -9,6 +9,8 @@ router.get("/eventos",eventosCtrl.getEvento)
 
 router.get("/eventosUser",eventosCtrl.getEventosUser)
 
+router.get("/anfitrion",eventosCtrl.getEventosAnfitrion)
+
 router.post("/eventos",eventosCtrl.postEventos)
 
 // router.put("/eventos",eventosCtrl.putEventos)

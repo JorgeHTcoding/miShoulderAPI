@@ -45,6 +45,8 @@ function getEventosUser(request, response){
     })
     
 }
+
+
 // function getEventosFiltro(request, response) {
     
 //         if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
@@ -182,6 +184,21 @@ function getEventosUser(request, response){
     // }
 
 
+    function getEventosAnfitrion(request, response){
+
+        console.log("Entramos por eventos y anf")
+        let sql = "SELECT * FROM eventos WHERE anfitrion=" + request.query.id
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+             }
+             else {
+                 response.send(result);
+                 console.log(result)
+             }
+         })
+     }
+
 
 function postEventos(request, response) {
     console.log("Entramos a la funcion posEventos")
@@ -283,4 +300,4 @@ function deleteEventos(request, response) {
 
 
 
-    module.exports = { getStart, getEvento, getEventosUser, postEventos, deleteEventos}
+    module.exports = { getStart, getEvento, getEventosUser, getEventosAnfitrion, postEventos, deleteEventos, }
