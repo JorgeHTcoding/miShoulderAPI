@@ -30,6 +30,13 @@ function getEventoProf(request, response){
     
 }else{
       let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
+}
+function getEventosUser(request, response){
+    
+    let usuario = request.query.id;
+   console.log(usuario);
+
+    let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
     connection.query(sql, function (err, result) {
                     if (err) {
                         console.log(err);
@@ -114,6 +121,8 @@ function deleteApuntar(request, response){
         }
     })
 }
+
+
 // function getEventosFiltro(request, response) {
     
 //         // if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
@@ -251,13 +260,28 @@ function deleteApuntar(request, response){
     
 
 
+    function getEventosAnfitrion(request, response){
+
+        console.log("Entramos por eventos y anf")
+        let sql = "SELECT * FROM eventos WHERE anfitrion=" + request.query.id
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+             }
+             else {
+                 response.send(result);
+                 console.log(result)
+             }
+         })
+     }
+
 
 function postEventos(request, response) {
     console.log("Entramos a la funcion posEventos")
 
     console.log(request.body.anfitrion);
 
-    let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha, img)" + "VALUES ('" + request.body.anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion + "','" + request.body.descripcion + "', '" + request.body.modalidad + "', '" + request.body.terapia + "', '" + request.body.fecha + "', '" + request.body.img + "')";
+    let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion_even, descripcion_even, modalidad, terapia, fecha, img_even)" + "VALUES ('" + request.body.anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion_even + "','" + request.body.descripcion_even + "', '" + request.body.modalidad + "', '" + request.body.terapia + "', '" + request.body.fecha + "', '" + request.body.img_even + "')";
 
     console.log(sql)
     console.log("entramos al back")
@@ -327,10 +351,14 @@ function deleteEventos(request, response) {
    
     let sql;
 
-    console.log(request.query.id + "ESTA ES LA ID DEL EVENTO EN DELETE")
+    console.log("ENTRO A DELETE-EVENTOS CON USER:  "  + request.query.id_user);
+    console.log("ENTRO A DELETE-EVENTOS CON EVENTO "  + request.query.id_eventos);
 
+    let myUser      = request.query.id_user;
+    let myEvento    = request.query.id_eventos;
 
-    sql = "DELETE FROM eventos WHERE id_eventos=" + request.query.id;
+    sql = `DELETE FROM user_evento WHERE id_usuario = ${myUser} AND id_eventos = ${myEvento}`
+
 
     connection.query(sql, function (err, result) {
         if (err) {
@@ -346,10 +374,9 @@ function deleteEventos(request, response) {
     })
 }
 
-function postEventos(request, response) {
-    
-}
+
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
     module.exports = { getStart, postEventos, getEventosUser, getEventoProf,postApuntar, deleteApuntar, getEventosAnfitrion,deleteEventos,putEventos}
+    // module.exports = { getStart, getEvento, getEventosUser, getEventosAnfitrion, postEventos, deleteEventos, }
