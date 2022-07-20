@@ -5,25 +5,9 @@ const connection = require("../database");
 //MIRAR  lo de respuesta a ver quien tiene el deber
 function getMensaje(request,response){
     let sql;
-    let emisor = request.query.id
-    console.log(emisor)
-    sql = "SELECT * FROM mensaje WHERE id_emisor=" + emisor  + "GROUP BY id_receptor" ;
-    connection.query(sql,function(err,result){
-        if(err){
-            console.log(err)
-        }else{
-            //Aqui se envia el log de chat, y id_users
-            response.send(result)
-            console.log(result)
-        }
-    })
-}
-function getConversacion(request,response){
-    let sql;
-    let emisor = request.query.emisor
-    let receptor = request.query.receptor
-    console.log(id)
-    sql = "SELECT * FROM mensaje WHERE id_emisor=" + emisor + " AND id_receptor="+receptor;
+    
+    
+    sql = "SELECT * FROM mensaje WHERE (id_emisor=" + request.query.id_emisor  + " AND id_receptor="+request.query.id_receptor +") OR (id_emisor=" + request.query.id_receptor  + " AND id_receptor="+request.query.id_emisor +")";
     connection.query(sql,function(err,result){
         if(err){
             console.log(err)
@@ -37,8 +21,24 @@ function getConversacion(request,response){
 
 function postMensaje(request,response){
     console.log("Entramos a la funcion postMensaje")
+   
     //pasamos el que envia por query, el receptor pasa como body!
-    let sql = "INSERT INTO mensaje(id_emisor, id_receptor,contenido)" + "VALUES ('" + request.query.id + "','" + request.body.id_receptor + "','" + request.body.contenido+"')";
+    let sql = "INSERT INTO mensaje(id_emisor, id_receptor,contenido)" + "VALUES ('" + request.body.id_emisor + "','" + request.body.id_receptor + "','" + request.body.contenido+"')";
+    connection.query(sql,function(err,result){
+        if(err){
+            console.log(err)
+        }else{
+        response.send(result)
+        console.log("El mensaje se envio correctamente")
+        console.log(result)
+        }
+    })
+}
+function postAnimo(request,response){
+    console.log("Entramos a la funcion postAnimo")
+   
+    //pasamos el que envia por query, el receptor pasa como body!
+    let sql = "INSERT INTO estado_animo(id_user, animo,energia,ansiedad)" + "VALUES ('" + request.query.id_user + "','" + request.body.animo + "','" + request.body.ansiedad + "','" + request.body.energia+"')";
     connection.query(sql,function(err,result){
         if(err){
             console.log(err)
@@ -92,7 +92,7 @@ function getEventos(request, response) {
         let date = request.body.date
         let datef = "date = "+"'" +request.body.date+"'"
         let filter=[loc,locf,mod,modf,ter,terf,date,datef]
-        let sql = "SELECT * FROM user_eventos " 
+        let sql = "SELECT * FROM user_evento " 
         console.log(filter)
         
         let control =1;
@@ -133,7 +133,7 @@ function getEventos(request, response) {
         let date = request.body.date
         let datef = "date = "+"'" +request.body.date+"'"
         let filter=[loc,locf,mod,modf,ter,terf,date,datef]
-        let sql = "SELECT * FROM user_eventos WHERE id_user="+id 
+        let sql = "SELECT * FROM user_evento WHERE id_user="+id 
         console.log(filter)
         
         for(let i=0; i<filter.length;i+=2){
@@ -176,5 +176,5 @@ function getEventos(request, response) {
 
 
 
-module.exports = {postMensaje , getMensaje, postPresentacion, getPresentacion, getConversacion}
+module.exports = {postMensaje , getMensaje, postPresentacion, getPresentacion, postAnimo}
 

@@ -7,8 +7,9 @@ const chatCtrl = require("../controller/chat.controller")
 router.get("/chat",chatCtrl.getMensaje)
 
 router.post("/chat",chatCtrl.postMensaje)
+router.post("/animo",chatCtrl.postAnimo)
 
-router.get("/conversacion",chatCtrl.getConversacion)
+
 
 // router.get("/filtro", chatCtrl.getEventos)
 

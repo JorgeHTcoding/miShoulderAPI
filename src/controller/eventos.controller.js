@@ -13,9 +13,10 @@ function getStart(request, response) {
 //Get Info Eventos con id user
 // url  /eventos?id= 
 
-function getEvento(request, response){
-    
-   
+function getEventoProf(request, response){
+    console.log("eventos prof")
+    if(request.query.id==null){
+       console.log("eventos prof if")
     let sql = "SELECT * FROM eventos " 
     connection.query(sql, function (err, result) {
                     if (err) {
@@ -27,11 +28,8 @@ function getEvento(request, response){
                     }
     })
     
-}
-function getEventosUser(request, response){
-    
-   
-    let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
+}else{
+      let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
     connection.query(sql, function (err, result) {
                     if (err) {
                         console.log(err);
@@ -41,24 +39,97 @@ function getEventosUser(request, response){
                         console.log(result)
                     }
     })
+}}
+function getEventosUser(request, response){
     
+   console.log("Entramos por eventos y users")
+   let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
+   connection.query(sql, function (err, result) {
+       if (err) {
+           console.log(err);
+        }
+        else {
+            response.send(result);
+            console.log(result)
+        }
+    })
+  
+
+
+}
+function getEventosAnfitrion(request, response){
+    
+   console.log("Entramos por eventos y anf")
+   let sql = "SELECT * FROM eventos WHERE anfitrion=" + request.query.id
+   connection.query(sql, function (err, result) {
+       if (err) {
+           console.log(err);
+        }
+        else {
+            response.send(result);
+            console.log(result)
+        }
+    })
+}
+function postApuntar(request, response){
+    
+  console.log("Entramos a la funcion posEventos")
+    
+    console.log(request.body)
+    let sql = "INSERT INTO user_evento(id_usuario,id_eventos)" + "VALUES ('" + request.body.id_user + "','" + request.body.id_eventos +"')";
+    console.log(sql)
+    console.log(sql)
+    console.log("entramos al back")
+    connection.query(sql, function (err, result) {
+
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+            if (result.insertId)
+                response.send(String(result.insertId))
+            else
+                response.send(result)
+        }
+    })
+}
+function deleteApuntar(request, response){
+    
+  console.log("Entramos a la funcion deleteApuntar")
+    
+    console.log(request.body)
+    let sql = "DELETE FROM user_evento WHERE id_usuario=" + request.query.id + " AND id_eventos=" + request.query.id_eventos;
+    console.log(sql)
+    console.log("entramos al back")
+    connection.query(sql, function (err, result) {
+
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+            if (result.insertId)
+                response.send(String(result.insertId))
+            else
+                response.send(result)
+        }
+    })
 }
 // function getEventosFiltro(request, response) {
     
-//         if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
+//         // if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
 
-//             sql = "SELECT * FROM user_eventos"
+//         //     sql = "SELECT * FROM user_eventos"
 
-//                 connection.query(sql, function (err, result) {
-//                     if (err) {
-//                         console.log(err);
-//                     }
-//                     else {
-//                         response.send(result);
-//                     }
-//                 })
+//         //         connection.query(sql, function (err, result) {
+//         //             if (err) {
+//         //                 console.log(err);
+//         //             }
+//         //             else {
+//         //                 response.send(result);
+//         //             }
+//         //         })
         
-//         }else {
+//         // }else {
 
 //             if(!request.query.id) {
             
@@ -147,37 +218,37 @@ function getEventosUser(request, response){
 
 //         }
 
+    
+
+
+        
+
+
+//     let sql;
+//     if(request.query.id){
+
+//     sql = "SELECT * FROM user_eventos WHERE id_user=" + request.query.id
+
+//     connection.query(sql, function (err, result) {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             response.send(result);
+//         }
+//     })
+//     }else{
+//        sql = "SELECT * FROM user_eventos"
+//         connection.query(sql, function (err, result) {
+//             if (err) {
+//                 console.log(err);
+//             }
+//             else {
+//                 response.send(result);
+//             }
+//         })
 //     }
-
-
-        // }
-
-
-    // let sql;
-    // if(request.query.id){
-
-    // sql = "SELECT * FROM user_eventos WHERE id_user=" + request.query.id
-
-    // connection.query(sql, function (err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     else {
-    //         response.send(result);
-    //     }
-    // })
-    // }else{
-    //    sql = "SELECT * FROM user_eventos"
-    //     connection.query(sql, function (err, result) {
-    //         if (err) {
-    //             console.log(err);
-    //         }
-    //         else {
-    //             response.send(result);
-    //         }
-    //     })
-    // }
-    // }
+    
 
 
 
@@ -206,77 +277,79 @@ function postEventos(request, response) {
 
 
 
-// function putEventos(request, response) {
-//     {
+function putEventos(request, response) {
+    {
 
         
-//         if (request.query.id_user_eventos != "") {
+        if (request.query.id_eventos != "") {
 
-//             console.log(request.query.id_user_eventos + " el id de usuario en el back")
+            console.log(request.query.id_eventos + " el id de usuario en el back")
 
-//             let anfitrion         = request.body.anfitrion;
-//             let titulo            = request.body.titulo;
-//             let localidad         = request.body.localidad;
-//             let direccion         = request.body.direccion;
-//             let descripcion       = request.body.descripcion;
-//             let modalidad         = request.body.modalidad;
-//             let terapia           = request.body.terapia;
-//             let fecha             = request.body.fecha;
+            let anfitrion         = request.body.anfitrion;
+            let titulo            = request.body.titulo;
+            let localidad         = request.body.localidad;
+            let direccion         = request.body.direccion;
+            let descripcion       = request.body.descripcion;
+            let modalidad         = request.body.modalidad;
+            let terapia           = request.body.terapia;
+            let fecha             = request.body.fecha;
+            let img               = request.body.img; 
 
          
+            let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha];
             
-//             let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha];
+            let sql = "UPDATE user_evento SET anfitrion = COALESCE(?,anfitrion) , " + "titulo = COALESCE(?, titulo), " +
+                                      "localidad = COALESCE(?,localidad), "  + "direccion = COALESCE(?,direccion), " +
+                                      "descripcion = COALESCE(?, descripcion), " + "modalidad = COALESCE(?, modalidad), " + 
+                                      "terapia = COALESCE(?, terapia), " + "fecha = COALESCE(?, fecha)" + "img = COALESCE(?, img),  WHERE id_eventos=" + request.query.id_eventos;
 
-//             let sql = "UPDATE user_eventos SET anfitrion = COALESCE(?,anfitrion) , " + "titulo = COALESCE(?, titulo), " +
-//                                       "localidad = COALESCE(?,localidad), "  + "direccion = COALESCE(?,direccion), " +
-//                                       "descripcion = COALESCE(?, descripcion), " + "modalidad = COALESCE(?, modalidad), " + 
-//                                       "terapia = COALESCE(?, terapia), " + "fecha = COALESCE(?, fecha) WHERE id_user_eventos=" + request.query.id_user_eventos;
-
-//             console.log(sql);
-//             connection.query(sql, params, function (err, result) {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     console.log(result);
-//                     if (result.insertId)
-//                         response.send(String(result.insertId))
-//                     else
-//                         response.send(result)
-//                 }
-//             });
-//         } else {
-//             console.log("Introduce un id válido")
-//         }
-//     }
-// }
+            console.log(sql);
+            connection.query(sql, params, function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(result);
+                    if (result.insertId)
+                        response.send(String(result.insertId))
+                    else
+                        response.send(result)
+                }
+            });
+        } else {
+            console.log("Introduce un id válido")
+        }
+    }
+}
 
 
 
-// function deleteEventos(request, response) {
+function deleteEventos(request, response) {
    
-//     let sql;
+    let sql;
 
-//     console.log(request.query.id + "ESTA ES LA ID DEL EVENTO")
-
-
-//     sql = "DELETE FROM eventos WHERE id_eventos=" + request.query.id;
-
-//     connection.query(sql, function (err, result) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             console.log(result);
-//             if (result.insertId)
-//                 response.send(String(result.insertId))
-//             else
-//                 response.send(result)
-//         }
-
-//     })
-// }
+    console.log(request.query.id + "ESTA ES LA ID DEL EVENTO EN DELETE")
 
 
+    sql = "DELETE FROM eventos WHERE id_eventos=" + request.query.id;
+
+    connection.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+            if (result.insertId)
+                response.send(String(result.insertId))
+            else
+                response.send(result)
+        }
+
+    })
+}
+
+function postEventos(request, response) {
+    
+}
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos, getEventosUser, getEvento}
+    module.exports = { getStart, postEventos, getEventosUser, getEventoProf,postApuntar, deleteApuntar, getEventosAnfitrion,deleteEventos,putEventos}
