@@ -26,6 +26,7 @@ function getEventoProf(request, response){
                         response.send(result);
                         console.log(result)
                     }
+<<<<<<< HEAD
                 })
             }}
             // }else{
@@ -38,6 +39,12 @@ function getEventosUser(request, response){
    console.log(usuario);
 
     let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
+=======
+    })
+
+}else{
+      let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
+>>>>>>> apiFinal
     connection.query(sql, function (err, result) {
                     if (err) {
                         console.log(err);
@@ -241,23 +248,6 @@ function getEventosFiltro(request, response) {
     //     })
     // }
     
-
-
-    function getEventosAnfitrion(request, response){
-
-        console.log("Entramos por eventos y anf")
-        let sql = "SELECT * FROM eventos WHERE anfitrion=" + request.query.id
-        connection.query(sql, function (err, result) {
-            if (err) {
-                console.log(err);
-             }
-             else {
-                 response.send(result);
-                 console.log(result)
-             }
-         })
-     }
-
 
 function postEventos(request, response) {
     console.log("Entramos a la funcion posEventos")
