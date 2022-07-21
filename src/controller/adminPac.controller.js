@@ -41,8 +41,6 @@ function deletePac(request, response) {
 
 function postPac(request, response) {
     {
-
-    
             console.log(request.query.id + " el id de usuario en el back")
             console.log("query"+request.query.diagnostico)
             let prueba = typeof request.query.diagnostico
@@ -51,8 +49,6 @@ function postPac(request, response) {
             // let prueba2 = typeof request.body.diagnostico.value
             // console.log(prueba2);
             
-            
-         
             let sql = "UPDATE profesional_pacientes SET diagnostico =" + "'" + request.body.diagnostico + "'" +
             " WHERE id_user=" + request.query.id
 
@@ -70,5 +66,7 @@ function postPac(request, response) {
             })
     }
 }
+
+
 
 module.exports = {getPac,deletePac,postPac}

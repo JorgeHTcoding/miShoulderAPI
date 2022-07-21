@@ -26,11 +26,10 @@ function getPacientes(request, response) {
 function putPacientes(request, response) {
 
     let sql;
-    if(request.query.id){
-
-    let id = request.query.id;
-
-    sql =  "UPDATE profesional_pacientes SET aceptado = 2 WHERE id_user=" + request.query.id
+    console.log("entro al controller putPacientes")
+    let id = request.body.id_user;
+    console.log(id + "id en el controller")
+    sql = `UPDATE profesional_pacientes SET aceptado = "aceptado" WHERE id_user=${id}` 
 
     connection.query(sql, function (err, result) {
         if (err) {
@@ -40,7 +39,52 @@ function putPacientes(request, response) {
             response.send(result);
         }
     })
-}}
+}
 
+// function putNegacionPac(request, response) {
 
-module.exports = {getPacientes,putPacientes}
+//     let sql;
+//     if(request.query.id){
+//     let mensaje = request.body.negacion;    
+//     let id = request.query.id;
+//     console.log(mensaje)
+//     console.log(id)
+
+//     sql =  "UPDATE profesional_pacientes SET contenido_rechazado ='"+ request.body.negacion+"' WHERE id_user=" + id
+
+//     connection.query(sql, function (err, result) {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             response.send(result);
+//         }
+//     })
+    
+// }}
+
+function putEstadoPac(request, response) {
+    
+    let sql;
+    console.log("entro al controller")
+    let id = request.body.id_user;
+    let mensaje = request.body.contenido_rechazo; //objeto del service por el body(mensaje es el atributo, hay que hacer3)
+    let id_prof = request.body.id_profesional;
+
+    console.log(request.body)
+
+    sql = `UPDATE profesional_pacientes SET aceptado ="rechazado", contenido_rechazado = '${mensaje}' WHERE id_user= ${id} AND id_profesional =${id_prof}` 
+    console.log(sql)
+    connection.query(sql, function (err, result) {
+        console.log("entro al connection")
+        if (err) {
+            console.log(err);
+        }
+        else {
+            response.send(result);
+        }
+    })
+    
+}
+
+module.exports = {getPacientes,putPacientes,putEstadoPac}
