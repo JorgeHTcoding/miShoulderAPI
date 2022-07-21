@@ -27,16 +27,9 @@ function getEventoProf(request, response){
                         console.log(result)
                     }
     })
-    
+
 }else{
       let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
-}
-function getEventosUser(request, response){
-    
-    let usuario = request.query.id;
-   console.log(usuario);
-
-    let sql = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE id_usuario=" + request.query.id
     connection.query(sql, function (err, result) {
                     if (err) {
                         console.log(err);
@@ -259,23 +252,6 @@ function deleteApuntar(request, response){
 //     }
     
 
-
-    function getEventosAnfitrion(request, response){
-
-        console.log("Entramos por eventos y anf")
-        let sql = "SELECT * FROM eventos WHERE anfitrion=" + request.query.id
-        connection.query(sql, function (err, result) {
-            if (err) {
-                console.log(err);
-             }
-             else {
-                 response.send(result);
-                 console.log(result)
-             }
-         })
-     }
-
-
 function postEventos(request, response) {
     console.log("Entramos a la funcion posEventos")
 
@@ -377,6 +353,5 @@ function deleteEventos(request, response) {
 
 
 
-    // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
     module.exports = { getStart, postEventos, getEventosUser, getEventoProf,postApuntar, deleteApuntar, getEventosAnfitrion,deleteEventos,putEventos}
-    // module.exports = { getStart, getEvento, getEventosUser, getEventosAnfitrion, postEventos, deleteEventos, }
+   
