@@ -26,11 +26,12 @@ function getEventoProf(request, response){
                         response.send(result);
                         console.log(result)
                     }
-    })
+                })
+            }}
+            // }else{
+            //     let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
+            // }
     
-}else{
-      let sql = "SELECT * FROM eventos JOIN user ON (anfitrion=id_user) WHERE id_eventos= " +request.query.id
-}
 function getEventosUser(request, response){
     
     let usuario = request.query.id;
@@ -46,7 +47,7 @@ function getEventosUser(request, response){
                         console.log(result)
                     }
     })
-}}
+}
 function getEventosUser(request, response){
     
    console.log("Entramos por eventos y users")
@@ -123,109 +124,91 @@ function deleteApuntar(request, response){
 }
 
 
-// function getEventosFiltro(request, response) {
-    
-//         // if(!request.query.id && !request.body.localidad && !request.body.modalidad && !request.body.terapia && !request.body.fecha) {
+function getEventosFiltro(request, response) {
+        console.log("______________________________________________________________________________________________________________________________")
+       if(!request.query.id){
 
-//         //     sql = "SELECT * FROM user_eventos"
-
-//         //         connection.query(sql, function (err, result) {
-//         //             if (err) {
-//         //                 console.log(err);
-//         //             }
-//         //             else {
-//         //                 response.send(result);
-//         //             }
-//         //         })
-        
-//         // }else {
-
-//             if(!request.query.id) {
-            
-//                 let localidad     = request.body.localidad
-//                 let localidadf    = "localidad = " + "'" + request.body.localidad + "'"
-//                 let modalidad     = request.body.modalidad
-//                 let modalidadf    = "modalidad = " + "'" + request.body.modalidad + "'"
-//                 let terapia       = request.body.terapia
-//                 let terapiaf      = "terapia = " + "'" + request.body.terapia + "'"
-//                 let fecha         = request.body.fecha
-//                 let fechaf        = "fecha = " + "'" + request.body.fecha + "'"
+                let localidad     = request.body.localidad
+                let localidadf    = "localidad = " + "'" + request.body.localidad + "'"
+                let modalidad     = request.body.modalidad
+                let modalidadf    = "modalidad = " + "'" + request.body.modalidad + "'"
+                let terapia       = request.body.terapia
+                let terapiaf      = "terapia = " + "'" + request.body.terapia + "'"
+                let fecha         = request.body.fecha
+                let fechaf        = "fecha = " + "'" + request.body.fecha + "'"
     
-//                 let filter = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
+                let filter = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
     
-//                 let sql = "SELECT * FROM user_eventos " 
-//                 console.log(filter)
+                let sql = "SELECT * FROM eventos " 
                 
-//                 let control = 1;
+                
+                let control = 1;
 
-//                 for(let i=0; i<filter.length; i+=2) {
+                for(let i=0; i<filter.length; i+=2) {
                     
-//                     if (filter[i] != undefined && filter[i] != "" && filter[i] != null ) {
-//                         sql += " AND " + filter[i+1]
+                    if (control>1 && filter[i] != undefined && filter[i] != "" && filter[i] != null ) {
+                        sql += " AND " + filter[i+1]
                        
-//                     } else if (filter[i] != undefined || '' || null){
-//                         sql += "WHERE " + filter[i+1];
-//                         control++;
-//                     }
-//                 }
-//                 console.log("La query dinamica es: ")
-//                 console.log(sql);
-//                 // sql.splice(sql.length-3,1);
-//                 // console.log(sql)
-    
-        
-//                 connection.query(sql, function (err, result) {
-//                     if (err) {
-//                         console.log(err);
-//                     }
-//                     else {
-//                         response.send(result);
-//                     }
-//                 })
+                    } else if (filter[i] != undefined && filter[i] != "" && filter[i] != null){
+                        sql += "WHERE " + filter[i+1];
+                        control++;
+                    }
+                }
+                console.log("La query dinamica es: ")
+                console.log(sql);
+            
+                connection.query(sql, function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        response.send(result);
+                    }
+                })
     
 
-//             }else{
+            }else{
 
-//                     let id = request.query.id
+                    let id = request.query.id
                     
-//                     let localidad     = request.body.localidad
-//                     let localidadf    = "localidad = " + "'" + request.body.localidad + "'"
-//                     let modalidad     = request.body.modalidad
-//                     let modalidadf    = "modalidad = " + "'" + request.body.modalidad + "'"
-//                     let terapia       = request.body.terapia
-//                     let terapiaf      = "terapia = " + "'" + request.body.terapia + "'"
-//                     let fecha         = request.body.fecha
-//                     let fechaf        = "fecha = " + "'" + request.body.fecha + "'"
+                    let localidad     = request.body.localidad
+                    let localidadf    = "localidad = " + "'" + request.body.localidad + "'"
+                    let modalidad     = request.body.modalidad
+                    let modalidadf    = "modalidad = " + "'" + request.body.modalidad + "'"
+                    let terapia       = request.body.terapia
+                    let terapiaf      = "terapia = " + "'" + request.body.terapia + "'"
+                    let fecha         = request.body.fecha
+                    let fechaf        = "fecha = " + "'" + request.body.fecha + "'"
                 
                     
-//                     let filter  = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
+                    let filter  = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
 
-//                     let sql     = "SELECT * FROM user_eventos WHERE id_user=" + id 
+                    let sql     = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE user_evento.id_usuario= " + id   
         
-//                     console.log(filter)
+                    console.log(filter)
                     
-//                     for(let i=0; i<filter.length; i+=2){
+                    for(let i=0; i<filter.length; i+=2){
                     
-//                         if (filter[i] != undefined && filter[i] != "" && filter[i] != null ){
-//                             sql += " AND " + filter[i+1]     
-//                     }}
+                        if (filter[i] != undefined && filter[i] != "" && filter[i] != null ){
+                            sql += " AND " + filter[i+1]     
+                    }}
 
-//                     console.log("La query dinamica es: " + sql)
-//                     // console.log(sql);
-//                     // sql.splice(sql.length-3,1);
-//                     // console.log(sql)
+                    console.log("La query dinamica es: " + sql)
+                    // console.log(sql);
+                    // sql.splice(sql.length-3,1);
+                    // console.log(sql)
             
-//                     connection.query(sql, function (err, result) {
-//                         if (err) {
-//                             console.log(err);
-//                         }
-//                         else {
-//                             response.send(result);
-//                         }
-//                     })
-//                 }
+                    connection.query(sql, function (err, result) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            response.send(result);
+                        }
+                    })
+                }
 
-//         }
+        }
 
     
 
@@ -233,30 +216,30 @@ function deleteApuntar(request, response){
         
 
 
-//     let sql;
-//     if(request.query.id){
+    // let sql;
+    // if(request.query.id){
 
-//     sql = "SELECT * FROM user_eventos WHERE id_user=" + request.query.id
+    // sql = "SELECT * FROM user_eventos WHERE id_user=" + request.query.id
 
-//     connection.query(sql, function (err, result) {
-//         if (err) {
-//             console.log(err);
-//         }
-//         else {
-//             response.send(result);
-//         }
-//     })
-//     }else{
-//        sql = "SELECT * FROM user_eventos"
-//         connection.query(sql, function (err, result) {
-//             if (err) {
-//                 console.log(err);
-//             }
-//             else {
-//                 response.send(result);
-//             }
-//         })
-//     }
+    // connection.query(sql, function (err, result) {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     else {
+    //         response.send(result);
+    //     }
+    // })
+    // }else{
+    //    sql = "SELECT * FROM user_eventos"
+    //     connection.query(sql, function (err, result) {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //         else {
+    //             response.send(result);
+    //         }
+    //     })
+    // }
     
 
 
@@ -378,5 +361,5 @@ function deleteEventos(request, response) {
 
 
     // module.exports = { getStart, getEventos, postEventos, putEventos, deleteEventos}
-    module.exports = { getStart, postEventos, getEventosUser, getEventoProf,postApuntar, deleteApuntar, getEventosAnfitrion,deleteEventos,putEventos}
+    module.exports = { getStart, postEventos, getEventosUser, getEventoProf,postApuntar, deleteApuntar, getEventosAnfitrion,deleteEventos,putEventos, getEventosFiltro}
     // module.exports = { getStart, getEvento, getEventosUser, getEventosAnfitrion, postEventos, deleteEventos, }

@@ -4,7 +4,8 @@ const eventosCtrl = require("../controller/eventos.controller")
 
 router.get("/", eventosCtrl.getStart);
 //notocar abajo, es de alvaro
-router.get("/eventos",eventosCtrl.getEventoProf)
+router.get("/eventos",eventosCtrl.getEventoProf) 
+router.post("/filtro",eventosCtrl.getEventosFiltro) 
 
 router.get("/anfitrion",eventosCtrl.getEventosAnfitrion)
 router.post("/apuntar",eventosCtrl.postApuntar)
