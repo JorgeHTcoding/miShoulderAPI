@@ -116,12 +116,12 @@ function getEventosFiltro(request, response) {
                 let localidadf    = "localidad = " + "'" + request.body.localidad + "'"
                 let modalidad     = request.body.modalidad
                 let modalidadf    = "modalidad = " + "'" + request.body.modalidad + "'"
-                let terapia       = request.body.terapia
-                let terapiaf      = "terapia = " + "'" + request.body.terapia + "'"
+                let acreditacion       = request.body.acreditacion  
+                let acreditacionf      = "acreditacion   = " + "'" + request.body.acreditacion   + "'"
                 let fecha         = request.body.fecha
                 let fechaf        = "fecha = " + "'" + request.body.fecha + "'"
     
-                let filter = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
+                let filter = [localidad,localidadf,modalidad,modalidadf,acreditacion  ,acreditacionf,fecha,fechaf]
     
                 let sql = "SELECT * FROM eventos " 
                 
@@ -159,13 +159,13 @@ function getEventosFiltro(request, response) {
                     let localidadf    = "localidad = " + "'" + request.body.localidad + "'"
                     let modalidad     = request.body.modalidad
                     let modalidadf    = "modalidad = " + "'" + request.body.modalidad + "'"
-                    let terapia       = request.body.terapia
-                    let terapiaf      = "terapia = " + "'" + request.body.terapia + "'"
+                    let acreditacion         = request.body.acreditacion  
+                    let acreditacionf      = "acreditacion   = " + "'" + request.body.acreditacion   + "'"
                     let fecha         = request.body.fecha
                     let fechaf        = "fecha = " + "'" + request.body.fecha + "'"
                 
                     
-                    let filter  = [localidad,localidadf,modalidad,modalidadf,terapia,terapiaf,fecha,fechaf]
+                    let filter  = [localidad,localidadf,modalidad,modalidadf,acreditacion ,acreditacionf,fecha,fechaf]
 
                     let sql     = "SELECT * FROM user_evento JOIN eventos ON (user_evento.id_eventos = eventos.id_eventos) WHERE user_evento.id_usuario= " + id   
         
@@ -231,7 +231,7 @@ function postEventos(request, response) {
 
     console.log(request.body.anfitrion);
 
-    let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion_even, descripcion_even, modalidad, terapia, fecha, img_even)" + "VALUES ('" + request.body.anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion_even + "','" + request.body.descripcion_even + "', '" + request.body.modalidad + "', '" + request.body.terapia + "', '" + request.body.fecha + "', '" + request.body.img_even + "')";
+    let sql = "INSERT INTO eventos(anfitrion, titulo, localidad, direccion_even, descripcion_even, modalidad, acreditacion  , fecha, img_even)" + "VALUES ('" + request.body.anfitrion + "','" + request.body.titulo + "','" + request.body.localidad + "', '" + request.body.direccion_even + "','" + request.body.descripcion_even + "', '" + request.body.modalidad + "', '" + request.body.acreditacion   + "', '" + request.body.fecha + "', '" + request.body.img_even + "')";
 
     console.log(sql)
     console.log("entramos al back")
@@ -265,17 +265,17 @@ function putEventos(request, response) {
             let direccion         = request.body.direccion;
             let descripcion       = request.body.descripcion;
             let modalidad         = request.body.modalidad;
-            let terapia           = request.body.terapia;
+            let acreditacion             = request.body.acreditacion  ;
             let fecha             = request.body.fecha;
             let img               = request.body.img; 
 
          
-            let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, terapia, fecha];
+            let params = [anfitrion, titulo, localidad, direccion, descripcion, modalidad, acreditacion  , fecha];
             
             let sql = "UPDATE user_evento SET anfitrion = COALESCE(?,anfitrion) , " + "titulo = COALESCE(?, titulo), " +
                                       "localidad = COALESCE(?,localidad), "  + "direccion = COALESCE(?,direccion), " +
                                       "descripcion = COALESCE(?, descripcion), " + "modalidad = COALESCE(?, modalidad), " + 
-                                      "terapia = COALESCE(?, terapia), " + "fecha = COALESCE(?, fecha)" + "img = COALESCE(?, img),  WHERE id_eventos=" + request.query.id_eventos;
+                                      "acreditacion   = COALESCE(?, acreditacion  ), " + "fecha = COALESCE(?, fecha)" + "img = COALESCE(?, img),  WHERE id_eventos=" + request.query.id_eventos;
 
             console.log(sql);
             connection.query(sql, params, function (err, result) {
